@@ -12,10 +12,12 @@ defmodule Pinecone.HTTP do
     |> parse_response()
   end
 
-  def post(type, endpoint, body, config \\ []) do
+  def post(type, endpoint, body, config \\ [], opts \\ []) do
+    params = opts[:params] || []
+
     type
     |> url(endpoint, config[:environment])
-    |> Req.post(body: Jason.encode!(body), headers: headers(config[:api_key]))
+    |> Req.post(body: Jason.encode!(body), params: params, headers: headers(config[:api_key]))
     |> parse_response()
   end
 

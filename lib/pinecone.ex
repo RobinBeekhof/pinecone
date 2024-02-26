@@ -360,7 +360,7 @@ defmodule Pinecone do
 
   defp delete_vector(path, name, config, opts) do
     with {:ok, host} <- index_host(name) do
-      HTTP.delete({:vectors, host}, path, config, opts)
+      HTTP.post({:vectors, host}, path, config, opts)
     end
   end
 
